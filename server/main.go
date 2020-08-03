@@ -40,11 +40,6 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println("Client Connected")
-	err = ws.WriteMessage(1, []byte(" "))
-	if err != nil {
-		log.Println(err)
-	}
 
 	log.Println("Conexão bem sucedida...")
 
