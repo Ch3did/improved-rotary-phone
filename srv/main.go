@@ -1,4 +1,4 @@
-package main
+//;;package main
 
 import (
 	"fmt"
@@ -6,11 +6,13 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+//Usuario ...
 type Usuario struct {
 	nome string
 	id   *websocket.Conn
 }
 
+//Mensagem ...
 type Mensagem struct {
 	Usuario *Usuario
 	text    string
@@ -19,6 +21,7 @@ type Mensagem struct {
 func main() {
 	n := PrimeiraAcao()
 	fmt.Println(n)
+
 }
 
 //PrimeiraAcao é o método de abertura da API
@@ -30,6 +33,15 @@ func PrimeiraAcao() string {
 	return nome
 }
 
-func WSocket() {
 
+.//HTTP server with WebSocket endpoint
+func Server() {
+http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    ws, err := NewHandler(w, r)
+    if err != nil {
+         // handle error
+    }
+    if err = ws.Handshake(); err != nil {
+        // handle error
+    }
 }
