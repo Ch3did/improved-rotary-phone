@@ -47,14 +47,15 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 }
 
 //Routes implementa as rotas da aplicação WEB
-func Routes() {
+func routes() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/ws", wsEndpoint)
 }
 
-func main() {
+//Inicio inicializa o pacote
+func Inicio() {
 	fmt.Println("Hello World")
-	Routes()
+	routes()
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

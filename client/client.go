@@ -1,3 +1,4 @@
 package client
 
-func main() {}
+//Inicio inicializa o pacote
+func Inicio() {}

@@ -2,7 +2,6 @@ package utils
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 )
 
@@ -18,9 +17,6 @@ func EscolhaDeUso() int {
 	// implementar tratamento da string recebida
 	if text == "2" || text == "client" {
 		return 1
-	} else {
-		fmt.Println("Erro...")
-		return 0
 	}
-
+	return 0
 }
