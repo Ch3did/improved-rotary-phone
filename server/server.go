@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"fmt"
@@ -17,13 +17,13 @@ func mantendoConexao(conn *websocket.Conn) {
 	for {
 		tipoMensagem, p, err := conn.ReadMessage()
 		if err != nil {
-			log.Println(err)
+			log.Println("mantendo a conexão")
 			return
 		}
 		fmt.Println(string(p))
 
 		if err := conn.WriteMessage(tipoMensagem, p); err != nil {
-			log.Println(err)
+			log.Println("a msg")
 			return
 		}
 	}
@@ -38,7 +38,7 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Println(err)
+		log.Println("endpoint")
 	}
 
 	log.Println("Conexão bem sucedida...")
@@ -57,3 +57,5 @@ func main() {
 	Routes()
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
+
+//Ajustar as msg e recebimentos
