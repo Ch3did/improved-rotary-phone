@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bufio"
+	"net/http"
 	"os"
 )
 
@@ -19,4 +20,9 @@ func EscolhaDeUso() int {
 		return 1
 	}
 	return 0
+}
+
+//Routes implementa as rotas da aplicação WEB
+func Routes() {
+	http.HandleFunc("/ws", wsEndpoint)
 }

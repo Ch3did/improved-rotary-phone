@@ -23,3 +23,11 @@ https://godoc.org/github.com/gorilla/websocket
 https://github.com/stinkyfingers/chat#chat-in-go
 
 https://www.websocket.org/echo.html
+
+
+https://github.com/gorilla/websocket/blob/master/examples/echo/client.go
+
+
+https://stackoverflow.com/questions/33928833/golang-websocket-client
+
+https://stackoverflow.com/questions/32745716/i-need-to-connect-to-an-existing-websocket-server-using-go-lang

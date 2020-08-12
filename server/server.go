@@ -13,33 +13,20 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: 1024,
 }
 
+//Porta ...
+var Porta = ":8080"
+
 func mantendoConexao(conn *websocket.Conn) {
 	for {
-		tipoMensagem, p, err := conn.ReadMessage()
-		if err != nil {
-			log.Println("mantendo a conexão")
-			return
-		}
-		fmt.Println(string(p))
-
-		if err := conn.WriteMessage(tipoMensagem, p); err != nil {
-			log.Println("a msg")
-			return
-		}
+		tipoMensagem, msg, _ := conn.ReadMessage()
+		conn.WriteMessage(tipoMensagem, msg)
 	}
-}
-
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Home Page")
 }
 
 func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 
-	ws, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println("endpoint")
-	}
+	ws, _ := upgrader.Upgrade(w, r, nil)
 
 	log.Println("Conexão bem sucedida...")
 
@@ -47,8 +34,7 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 }
 
 //Routes implementa as rotas da aplicação WEB
-func routes() {
-	http.HandleFunc("/", homePage)
+func Routes() {
 	http.HandleFunc("/ws", wsEndpoint)
 }
 
@@ -56,7 +42,7 @@ func routes() {
 func Inicio() {
 	fmt.Println("Hello World")
 	routes()
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(porta, nil))
 }
 
 //Ajustar as msg e recebimentos
