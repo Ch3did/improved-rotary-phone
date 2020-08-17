@@ -12,14 +12,13 @@ import (
 func main() {
 	fmt.Println("CHAT UOLDACHINA")
 	fmt.Println("Deseja iniciar o server (1) ou startar o client (2)?...")
-	escolha := utils.EscolhaDeUso()
-	if escolha == 1 {
+	escolha := utils.Scan()
+	if escolha == "1" {
 		server.Inicio()
 	}
-	if escolha == 2 {
+	if escolha == "2" {
 		client.Inicio()
 	} else {
-		log.Fatal("Opção inválida")
+		log.Fatal("Opção Inválida ")
 	}
-
 }

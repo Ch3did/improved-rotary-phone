@@ -1,19 +1,26 @@
 package client
 
 import (
-	gws "github.com/gorilla/websocket"
+	"fmt"
+
+	"github.com/Ch3did/improved-rotary-phone/utils"
 )
 
-var port = ()
-
-func cliente (nome string, gws.Dialer{})
+var (
+	msg  string
+	nick string
+)
 
 //Inicio inicializa o pacote
 func Inicio() {
-	conectandoAoSrv()
-	
+	fmt.Println("Me dê o seu nick: ")
+	nick = utils.Scan()
+	mandarMsg()
 }
 
-func conectandoAoSrv(){
-	conn, response, _ := gws.Dial()
+func mandarMsg() {
+	for {
+		msg = utils.Scan()
+		fmt.Printf("[%s] %s", nick, msg)
+	}
 }

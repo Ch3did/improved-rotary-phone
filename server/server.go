@@ -41,8 +41,8 @@ func Routes() {
 //Inicio inicializa o pacote
 func Inicio() {
 	fmt.Println("Hello World")
-	routes()
-	log.Fatal(http.ListenAndServe(porta, nil))
+	Routes()
+	log.Fatal(http.ListenAndServe(Porta, nil))
 }
 
 //Ajustar as msg e recebimentos
