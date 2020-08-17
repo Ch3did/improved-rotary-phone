@@ -36,11 +36,13 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 //Routes implementa as rotas da aplicação WEB
 func Routes() {
 	http.HandleFunc("/ws", wsEndpoint)
+	fmt.Print("localhost", Porta, "/ws\n")
 }
 
 //Inicio inicializa o pacote
 func Inicio() {
-	fmt.Println("Hello World")
+	fmt.Println("Server On...")
+
 	Routes()
 	log.Fatal(http.ListenAndServe(Porta, nil))
 }
