@@ -21,6 +21,11 @@ func mantendoConexao(conn *websocket.Conn) {
 		tipoMensagem, msg, _ := conn.ReadMessage()
 		conn.WriteMessage(tipoMensagem, msg)
 		fmt.Print(msg)
+
+		if err := conn.WriteMessage(tipoMensagem, msg); err != nil {
+			log.Println(err)
+			return
+		}
 	}
 }
 
