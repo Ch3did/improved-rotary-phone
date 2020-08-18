@@ -20,6 +20,7 @@ func mantendoConexao(conn *websocket.Conn) {
 	for {
 		tipoMensagem, msg, _ := conn.ReadMessage()
 		conn.WriteMessage(tipoMensagem, msg)
+		fmt.Print(msg)
 	}
 }
 
@@ -31,6 +32,7 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 	log.Println("Conexão bem sucedida...")
 
 	mantendoConexao(ws)
+
 }
 
 //Routes implementa as rotas da aplicação WEB
@@ -42,7 +44,6 @@ func Routes() {
 //Inicio inicializa o pacote
 func Inicio() {
 	fmt.Println("Server On...")
-
 	Routes()
 	log.Fatal(http.ListenAndServe(Porta, nil))
 }
