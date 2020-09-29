@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Ch3did/improved-rotary-phone/client"
-	"github.com/Ch3did/improved-rotary-phone/server"
-	"github.com/Ch3did/improved-rotary-phone/utils"
+	"main.go/client"
+	"main.go/server"
+	"main.go/utils"
 )
 
 func main() {
@@ -17,7 +17,9 @@ func main() {
 		server.Inicio()
 	}
 	if escolha == "2" {
-		client.Inicio()
+		fmt.Print("Me dê o seu nick: ")
+		nick := utils.Scan()
+		client.Inicio(nick)
 	} else {
 		log.Fatal("Opção Inválida ")
 	}

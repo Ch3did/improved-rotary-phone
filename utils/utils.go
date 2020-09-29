@@ -5,10 +5,18 @@ import (
 	"os"
 )
 
-//Scan recebe o input do usuário para escoler o tipo da aplicação
+var msgFormatado string
+
+//Scan recebe o input do usuário
 func Scan() string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	text := scanner.Text()
 	return text
+}
+
+func FormatMSG(nick, msg string) (msgFormatado string) {
+	msgFormatado = ("[" + nick + "]: " + msg + "\n")
+	return
+
 }

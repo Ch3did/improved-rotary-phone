@@ -2,7 +2,6 @@ package server
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -11,46 +10,35 @@ import (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	CheckOrigin:     func(r *http.Request) bool { return true },
 }
 
-//Porta ...
-var Porta = ":8080"
+func Inicio() {
+	http.HandleFunc("/", handler)
 
-func mantendoConexao(conn *websocket.Conn) {
+	http.ListenAndServe(":3000", nil)
+}
+
+func handler(writer http.ResponseWriter, request *http.Request) {
+	conn, err := upgrader.Upgrade(writer, request, nil)
+	if err != nil {
+		fmt.Println(err)
+	}
 	for {
-		tipoMensagem, msg, _ := conn.ReadMessage()
-		conn.WriteMessage(tipoMensagem, msg)
-		fmt.Print(msg)
+		// Lê a msg
+		msgType, msg, err := conn.ReadMessage()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		// joga no console
+		fmt.Println(string(msg))
 
-		if err := conn.WriteMessage(tipoMensagem, msg); err != nil {
-			log.Println(err)
+		// Devolvendo a mensagem recebida
+		conn.WriteMessage(msgType, msg)
+		if err != nil {
+			fmt.Println(err)
 			return
 		}
 	}
 }
-
-func wsEndpoint(w http.ResponseWriter, r *http.Request) {
-	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
-
-	ws, _ := upgrader.Upgrade(w, r, nil)
-
-	log.Println("Conexão bem sucedida...")
-
-	mantendoConexao(ws)
-
-}
-
-//Routes implementa as rotas da aplicação WEB
-func Routes() {
-	http.HandleFunc("/ws", wsEndpoint)
-	fmt.Print("localhost", Porta, "/ws\n")
-}
-
-//Inicio inicializa o pacote
-func Inicio() {
-	fmt.Println("Server On...")
-	Routes()
-	log.Fatal(http.ListenAndServe(Porta, nil))
-}
-
-//Ajustar as msg e recebimentos
