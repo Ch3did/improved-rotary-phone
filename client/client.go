@@ -9,11 +9,14 @@ import (
 	"main.go/utils"
 )
 
+// Inicio inicia
 func Inicio(nick string) {
-	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:3000/", nil)
+	conn, _, err := websocket.DefaultDialer.Dial("localhost:3000/", nil)
 	if err != nil {
 
 	}
+	defer conn.Close()
+
 	go func() {
 		for {
 			// Lê a msg

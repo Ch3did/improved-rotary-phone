@@ -13,7 +13,9 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin:     func(r *http.Request) bool { return true },
 }
 
+// Inicio inicia
 func Inicio() {
+
 	http.HandleFunc("/", handler)
 
 	http.ListenAndServe(":3000", nil)
@@ -24,6 +26,7 @@ func handler(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	for {
 		// Lê a msg
 		msgType, msg, err := conn.ReadMessage()
@@ -32,6 +35,7 @@ func handler(writer http.ResponseWriter, request *http.Request) {
 			return
 		}
 		// joga no console
+
 		fmt.Println(string(msg))
 
 		// Devolvendo a mensagem recebida
